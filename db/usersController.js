@@ -55,7 +55,6 @@ const updatePassword = (email, password, new_password) => {
     })
 };
 
-
 module.exports = {
     addUser,
     checkUser,

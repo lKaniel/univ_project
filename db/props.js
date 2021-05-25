@@ -1,12 +1,11 @@
 const mysql = require('mysql');
 
 const con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "Wy?T*wN~pm%dfSp5Epzsa",
-    port: 3306,
-    // insecureAuth : true,
-    database: "univ_project"
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    port: process.env.DB_PORT,
+    database: process.env.DB_BASE
 });
 
 module.exports = con;
