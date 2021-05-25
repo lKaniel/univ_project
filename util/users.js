@@ -1,3 +1,3 @@
 let register = (login, password) => {
-
+    
 }
