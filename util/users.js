@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const {innitFolder} = require("./files");
 const {generateAccessToken} = require("./tokenValidation");
 const {getPassword} = require("../db/usersController");
 const {addUser} = require("../db/usersController");
@@ -8,6 +9,7 @@ const register = async (email, password) => {
     const encryptedPassword = await bcrypt.hash(password, saltRounds)
     try {
         return await addUser(email, encryptedPassword)
+        innitFolder(email)
     } catch (e) {
         return false
     }
