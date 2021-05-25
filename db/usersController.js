@@ -29,6 +29,23 @@ const checkUser = (email, password) => {
     });
 }
 
+const getPassword = (email) => {
+    return new Promise(function (resolve, reject) {
+        const sql = `SELECT * FROM users WHERE email = "${email}"`;
+        con.query(sql, function (err, result) {
+            if (err) {
+                reject(err);
+            }
+            if (result === undefined) resolve(null);
+            for (let i = 0; i < result?.length; i++) {
+                let sqlPost = result[i];
+                resolve(sqlPost.password);
+            }
+            resolve(null);
+        });
+    });
+}
+
 const removeUser = (email) => {
     return new Promise(function (resolve, reject) {
         const sql = `DELETE FROM users WHERE email = "${email}"`;
@@ -41,11 +58,9 @@ const removeUser = (email) => {
     })
 };
 
-const updatePassword = (email, password, new_password) => {
+const updatePassword = (email, password) => {
     return new Promise(function (resolve, reject) {
-        let user = checkUser(email, password)
-        if (!user) resolve(false)
-        const sql = `UPDATE users set password = "${new_password}" WHERE email = ${email}`;
+        const sql = `UPDATE users set password = "${password}" WHERE email = ${email}`;
         con.query(sql, function (err, result) {
             if (err) {
                 reject(err);
@@ -59,5 +74,6 @@ module.exports = {
     addUser,
     checkUser,
     removeUser,
-    updatePassword
+    updatePassword,
+    getPassword
 };

@@ -6,13 +6,8 @@ const sassMiddleware = require('node-sass-middleware');
 
 require('dotenv').config()
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 const {createTables} = require("./db/generalDBController");
-
 createTables()
-
-console.log(require('crypto').randomBytes(64).toString('hex'))
 
 const app = express();
 
@@ -31,7 +26,11 @@ const app = express();
 }
 
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+const registerRouter = require('./routes/register')
+app.use('/register', registerRouter);
+const loginRouter = require('./routes/login')
+app.use('/login', loginRouter);
+const testRouter = require('./routes/test')
+app.use('/test', testRouter);
 
 module.exports = app;
