@@ -13,7 +13,7 @@ let getInnerFiles = (email, folder) => {
     return new Promise(function (resolve, reject) {
         fs.readdir(path.join(__dirname, "../files", email, folder), async (err, files) => {
             const result = []
-            for (const file of files){
+            for (const file of files) {
                 const isItFile = await isFile(email, path.join(folder, file))
                 result.push({file: file, isDir: isItFile})
             }
@@ -39,6 +39,11 @@ let addFolder = (email, pathh, name) => {
     })
 }
 
+let addFile = async (email, pathh, file) => {
+        const res = await file.mv(path.join(__dirname, "../files", email, pathh));
+        return res;
+}
+
 let getFile = (email, file) => {
     return path.join(__dirname, "../files", email, file)
 }
@@ -48,5 +53,6 @@ module.exports = {
     getInnerFiles,
     innitFolder,
     addFolder,
+    addFile,
     getFile
 }

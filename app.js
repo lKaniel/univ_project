@@ -38,5 +38,7 @@ const downloadFileRouter = require('./routes/downloadFile')
 app.use('/download', downloadFileRouter);
 const addFolderRouter = require('./routes/addFolder')
 app.use('/addfolder', addFolderRouter);
+const addFileRouter = require('./routes/addFile')
+app.use('/addfile', addFileRouter);
 
 module.exports = app;
