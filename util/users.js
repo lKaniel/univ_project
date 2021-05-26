@@ -8,8 +8,8 @@ const saltRounds = 10;
 const register = async (email, password) => {
     const encryptedPassword = await bcrypt.hash(password, saltRounds)
     try {
-        return await addUser(email, encryptedPassword)
         innitFolder(email)
+        return await addUser(email, encryptedPassword)
     } catch (e) {
         return false
     }

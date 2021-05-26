@@ -32,5 +32,7 @@ const loginRouter = require('./routes/login')
 app.use('/login', loginRouter);
 const testRouter = require('./routes/test')
 app.use('/test', testRouter);
+const getFilesRouter = require('./routes/getFiles')
+app.use('/getFiles', getFilesRouter);
 
 module.exports = app;
