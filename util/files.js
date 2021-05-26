@@ -31,18 +31,22 @@ let innitFolder = (email) => {
     });
 }
 
-let addFolder = (email, path, name) => {
-    fs.mkdir(path.join(__dirname, "../files", email, path, name), (err) => {
-        if (err) {
-            return console.error(err);
-        }
-        // console.log('Directory created successfully!');
-    });
+let addFolder = (email, pathh, name) => {
+    return new Promise(function (resolve, reject) {
+        fs.mkdir(path.join(__dirname, "../files", email, pathh, name), (err) => {
+            resolve(!err);
+        });
+    })
+}
+
+let getFile = (email, file) => {
+    return path.join(__dirname, "../files", email, file)
 }
 
 
 module.exports = {
     getInnerFiles,
     innitFolder,
-    addFolder
+    addFolder,
+    getFile
 }

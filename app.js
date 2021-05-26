@@ -34,5 +34,9 @@ const testRouter = require('./routes/test')
 app.use('/test', testRouter);
 const getFilesRouter = require('./routes/getFiles')
 app.use('/getFiles', getFilesRouter);
+const downloadFileRouter = require('./routes/downloadFile')
+app.use('/download', downloadFileRouter);
+const addFolderRouter = require('./routes/addFolder')
+app.use('/addfolder', addFolderRouter);
 
 module.exports = app;
