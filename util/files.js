@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require('path');
+const rimraf = require("rimraf");
 
 let isFile = (email, folder) => {
     return new Promise(function (resolve, reject) {
@@ -40,12 +41,20 @@ let addFolder = (email, pathh, name) => {
 }
 
 let addFile = async (email, pathh, file) => {
-        const res = await file.mv(path.join(__dirname, "../files", email, pathh));
+        const res = await file.mv(path.join(__dirname, "../files", email, pathh, file.name));
         return res;
 }
 
 let getFile = (email, file) => {
     return path.join(__dirname, "../files", email, file)
+}
+
+let removeFile = (email, pathh, file) => {
+    return new Promise(function (resolve, reject) {
+        rimraf(path.join(__dirname, "../files", email, pathh, file), () => {
+            resolve(true)
+        });
+    })
 }
 
 
@@ -54,5 +63,6 @@ module.exports = {
     innitFolder,
     addFolder,
     addFile,
-    getFile
+    getFile,
+    removeFile
 }

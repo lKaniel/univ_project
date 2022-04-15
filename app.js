@@ -3,6 +3,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const sassMiddleware = require('node-sass-middleware');
+const cors = require("cors");
 
 require('dotenv').config()
 
@@ -10,6 +11,8 @@ const {createTables} = require("./db/generalDBController");
 createTables()
 
 const app = express();
+
+app.use(cors())
 
 {
   app.use(logger('dev'));
@@ -40,5 +43,7 @@ const addFolderRouter = require('./routes/addFolder')
 app.use('/addfolder', addFolderRouter);
 const addFileRouter = require('./routes/addFile')
 app.use('/addfile', addFileRouter);
+const removeFileRouter = require('./routes/removeFile')
+app.use('/removefile', removeFileRouter);
 
 module.exports = app;

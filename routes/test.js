@@ -5,7 +5,7 @@ const {login} = require('../util/users')
 
 router.get('/', authenticateToken, function (req, res, next) {
     const email = req.email;
-    res.send(email)
+    res.send(true)
 });
 
 module.exports = router;

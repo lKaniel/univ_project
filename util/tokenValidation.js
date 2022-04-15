@@ -4,9 +4,14 @@ function generateAccessToken(email) {
     return jwt.sign(email, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
 }
 
+function generateAccessTokenEndless(email) {
+    return jwt.sign(email, process.env.TOKEN_SECRET, { expiresIn: '365d' });
+}
+
 function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization']
-    const token = authHeader && authHeader.split(' ')[1]
+    let token = authHeader && authHeader.split(' ')
+    token = token[token?.length-1]
 
     if (token == null) return res.sendStatus(401)
 
